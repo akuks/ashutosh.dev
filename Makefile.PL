@@ -14,6 +14,14 @@ requires 'Catalyst::Plugin::ConfigLoader';
 requires 'Catalyst::Plugin::Static::Simple';
 requires 'Catalyst::Action::RenderView';
 requires 'Moose';
+requires 'Catalyst::Plugin::Static::Simple';
+requires 'Catalyst::Plugin::Session::Store::File';
+requires 'Catalyst::Plugin::Static::Simple';
+requires 'Catalyst::Plugin::Session::State::Cookie';
+requires 'Crypt::PBKDF2';
+requires 'MooseX::NonMoose';
+requires 'DBIx::Class::EncodedColumn';
+requires 'DBIx::Class::EncodedColumn::Crypt::PBKDF2';
 requires 'namespace::autoclean';
 requires 'Config::General'; # This should reflect the config file format you've chosen
                  # See Catalyst::Plugin::ConfigLoader for supported formats
