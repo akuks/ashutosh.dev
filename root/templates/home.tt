@@ -1,0 +1,86 @@
+[% USE Dumper %]
+<!-- Home -->
+<div id="homePage"></div>
+
+<script type="text/jsx" src="/static/js/homeComponent.js"></script>
+
+[% #Dumper.dump(blogs) %]
+
+<div class="container">
+ 
+    <div class="row">
+        <div class="col"> 
+            <div class="col-lg-8 col-md-10 mx-auto">
+                [% IF ! blogs.0.title %]
+                    <p> Topic not available. Return to  <a href="/"> Home Page </a> </p>
+                
+                [% END %]
+                
+                [% FOREACH blog IN blogs %]
+                <div class="post-preview">
+                    <a href="/blog/post/[% blog.year %]/[% blog.month %]/[% blog.slug %]">
+                        <h2 class="post-title">
+                            [% blog.title %]
+                        </h2>
+                        <h3 class="post-subtitle">
+                            [% blog.subtitle %]
+                        </h3>
+                    </a>
+
+                    <p class="post-meta">Posted by
+                        <a href="/aboutme">[% blog.user.username %]</a>
+                        on [% blog.create_date %]
+                        ( <a href="/?category=[% blog.category.id %]"> [% blog.category.name %] </a> )
+                    </p>
+
+                </div>
+                <hr>
+                [% END %]
+                
+            </div>
+        
+        </div>
+        
+        
+        <!-- Search form -->
+        <div class="md-form mt-0" >
+            <form class="form" method="GET" action="/"> 
+                <input class="form-group form-control" type="text" placeholder="Search Topic" name="search" aria-label="Search" required>
+            </form> 
+            <hr>
+            <!-- Subscription Form -->
+            <div class="">
+                <form class="form" method="POST" action="/subscribe"> 
+                    <label for=""> Subscribe Here</label>
+                    <input class="form-group form-control" type="email" placeholder="Your Email" name="search" aria-label="Search" required>
+                    <input class="btn btn-primary" type="submit" value="Subscribe" name="submit">
+                </form> 
+            </div>
+            <hr> 
+
+            <div class=""> 
+                <ul class="list-group list-group-flush">
+                     <li class="list-group-item"> <strong> Category </strong> </li>
+                    [% FOREACH cat IN category %]
+                        <li class="list-group-item d-flex justify-content-between align-items-center"> 
+                            <a href="/?category=[% cat.id %]"> <small> [% cat.name %] </small> </a>
+                            <span class="badge"> <a href="/?category=[% cat.id %]"> <small class="badge-light badge-pill"> [% cat.count %] </small> </a> </span>
+                        </li>
+                    [% END %]
+                </ul>
+            </div>
+            <hr>
+
+        </div>
+        
+        
+        
+    </div>
+
+
+     <!-- Category -->
+      
+          
+</div>
+
+

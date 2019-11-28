@@ -1,0 +1,55 @@
+[% USE Dumper %]
+
+[% #Dumper.dump(post) %]
+
+<!-- Page Header -->
+  <header class="masthead" style="background-image: url('/static/images/intro.png')">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-5 col-md-10 mx-auto">
+          <div class="post-heading">
+            <h1> [% post.0.title %] </h1>
+            <!-- h2 class="subheading">Problems look mighty small from 150 miles up</h2 -->
+            <span class="meta">Posted by
+              <a href="#">[% post.0.author %]</a>
+              on [% post.0.create_date %]</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+   
+   <!-- Post Content -->
+    <article>
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="col-lg-10 col-md-10 mx-auto">
+                    <a href="/" class="btn btn-primary">  <i class="fas fa-arrow-left"></i> </a>
+                        [% post.0.body %]
+                    </div>
+                </div>
+
+                <!-- Search form -->
+        <div class="md-form mt-0" >
+            <form class="form" method="GET" action="/"> 
+                <input class="form-group form-control" type="text" placeholder="Search Topic" name="search" aria-label="Search" required>
+            </form> 
+
+            <div class=""> 
+                <ul class="list-group list-group-flush">
+                     <li class="list-group-item"> Category </li>
+                    [% FOREACH cat IN category %]
+                        <li class="list-group-item d-flex justify-content-between align-items-center"> 
+                            <a href="/?category=[% cat.id %]"> <small> [% cat.name %] </small> </a>
+                            <span class="badge"> <a href="/?category=[% cat.id %]"> <small class="badge-light badge-pill"> [% cat.count %] </small> </a> </span>
+                        </li>
+                    [% END %]
+                </ul>
+            </div>
+                
+            </div>
+        </div>
+    </article>

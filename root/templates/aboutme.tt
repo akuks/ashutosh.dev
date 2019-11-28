@@ -1,0 +1,28 @@
+<!-- Page Header -->
+  <header class="masthead" style="background-image: url('/static/images/aboutme.png')">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="page-heading">
+            <h1>Ashutosh Kukreti</h1>
+            <span class="subheading">Student of Perl, Python and Machine Learning.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <p>I have more than 12 years of experience in designing, implementation, and Integration of various  Enterprise Applications to suit the different activities as per the operational or business requirement. </p>
+        <p>Primarily, I am a backend developer/Technical Blogger and mainly code in Perl and Python but do not shy away to dirty my hands in frontend programming language like Angular/React/Flutter.</p>
+        <p>I am enthusiast about Machine Learning and AI, how they change the technology and human life. </p>
+        <p>P.S. : When not coding, you can catch me in the cricket ground. 🙂</p>
+      </div>
+    </div>
+  </div>
+
+  <hr>
