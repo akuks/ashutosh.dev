@@ -22,6 +22,7 @@ requires 'Crypt::PBKDF2';
 requires 'MooseX::NonMoose';
 requires 'DBIx::Class::EncodedColumn';
 requires 'DBIx::Class::EncodedColumn::Crypt::PBKDF2';
+requires 'JSON';
 requires 'namespace::autoclean';
 requires 'Config::General'; # This should reflect the config file format you've chosen
                  # See Catalyst::Plugin::ConfigLoader for supported formats

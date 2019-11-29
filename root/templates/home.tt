@@ -3,6 +3,7 @@
 <div id="homePage"></div>
 
 <script type="text/jsx" src="/static/js/homeComponent.js"></script>
+<script type="text/jsx" src="/static/js/subscriberComponent.js"></script>
 
 [% #Dumper.dump(blogs) %]
 
@@ -49,13 +50,7 @@
             </form> 
             <hr>
             <!-- Subscription Form -->
-            <div class="">
-                <form class="form" method="POST" action="/subscribe"> 
-                    <label for=""> Subscribe Here</label>
-                    <input class="form-group form-control" type="email" placeholder="Your Email" name="search" aria-label="Search" required>
-                    <input class="btn btn-primary" type="submit" value="Subscribe" name="submit">
-                </form> 
-            </div>
+            <div class="" id="subscriber_div"> </div>
             <hr> 
 
             <div class=""> 
