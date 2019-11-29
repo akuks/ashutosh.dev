@@ -65,14 +65,16 @@ sub index :Path :Args(0) {
         title       => $_->title,
         slug        => $_->slug,
         status      => $_->status,
+        
         # Category belongs to
         category    => {
             id   => $_->category->id,
             name => $_->category->name
         },
+
+        # Dates
         year        => $_->creation_date->strftime('%Y'),
         month       => $_->creation_date->strftime('%m'),
-        # Dates
         create_date => $_->creation_date->strftime('%B %d, %Y'),
         update_date => $_->update_date->date,
     } } @blog;
@@ -82,7 +84,7 @@ sub index :Path :Args(0) {
     # Hello World
     $c->stash(
         template => 'home.tt',
-        title    => 'Ashutosh Kukreti Personal Web',
+        title    => 'Ashutosh Personal Web Blog',
         blogs    => \@blog,
         category => [
             map { { 
@@ -106,7 +108,6 @@ sub _get_blog_list {
         return $c->model('DB::Blog')->search({ category_id => $params->{category} });
     }
     elsif ( $params->{search}) {
-        
         return (
             $c->model('DB::Blog')->search({ title => { -like => '%'.$params->{search}.'%' } })
         );
