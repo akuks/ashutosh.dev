@@ -1,0 +1,42 @@
+<br><br>
+
+<div class="container"> 
+    <a href="/blog/new" class="btn btn-primary"> Add New Blog </a> 
+</div>
+
+<br>
+
+<table id="blog_table_list" class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Title</th>
+      <th scope="col">Author</th>
+      <th scope="col">Category</th>
+      <th scope="col">Date (Created)</th>
+      <th scope="col">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+
+    [% FOREACH blog IN blogs %]
+       <tr>
+            <th scope="row">[% blog.count %]</th>
+            <td> <a href="/blog/post/[% blog.year %]/[% blog.month %]/[% blog.slug %]"> [% blog.title %] </a> </td>
+            <td>[% blog.user.username %]</td>
+            <td>[% blog.category.name %]</td>
+            <td>[% blog.create_date %]</td>
+            <td>
+                <a href="#"> <i class="fas fa-edit"></i> </a>  <a href="#"> <i class="fas fa-archive"></i> </a>
+            </td>
+       </tr>
+    [% END %]
+  </tbody>
+</table>
+
+<!-- Only Valid for This Page -->
+<style type="text/css">
+    #mainNav {
+        background-color: teal;
+    }
+</style>

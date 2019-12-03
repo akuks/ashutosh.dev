@@ -53,7 +53,7 @@ sub index :Path :Args(0) {
 
     # If category or search topic is passed in parameters
     my @blog = ( $params->{category} || $params->{search} ) ? 
-        _get_blog_list($c, $params) : $c->model('DB::Blog')->search({}) ;
+        _get_blog_list($c, $params) : $c->model('DB::Blog')->search({ status => 1 }) ;
 
     @blog = map { { 
         # User details

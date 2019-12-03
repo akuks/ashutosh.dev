@@ -1,0 +1,70 @@
+<br> <br>
+
+<div class="container">
+    
+    <form class="form" method="post" action="/blog/new">
+        <!-- Blog Title -->
+        <div class="form-group">
+            <label for="adminBlog">Title of the Blog</label>
+            <input type="text" class="form-control" id="blog_title" name="title" placeholder="Blog Title" required>
+        </div>
+
+        <!-- Blog Category -->
+         <div class="form-group">
+            <label for="adminBlog">Select Blog Category</label>
+            <select class="custom-select" name="category" required>
+                <option selected>Select Category</option>
+                [% FOREACH cat IN category %]
+                   <option value="[% cat.id %]">[% cat.name %]</option>
+                [% END %]
+            </select>
+        </div>
+
+        <!-- Slug -->
+         <div class="form-group">
+            <label for="adminBlog">Slug</label>
+            <input type="text" name="slug" class="form-control" id="blog_slug" placeholder="Slug">
+        </div>
+        <br>
+        
+        <!-- Slug -->
+         <div class="form-group">
+             <textarea class="editable" id="body" name="body"> </textarea>
+        </div>
+
+        <input type="submit" name="save_post" class="btn btn-primary" value="Save">
+        <input type="submit" name="publish_post" class="btn btn-primary" value="Publish">
+    </form>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.js"></script>
+
+
+<script>
+    $(document).ready(function () {
+        $('.editable').summernote({
+        placeholder: 'Enter Blog Text Here...',
+        name: 'body',
+        tabsize: 2,
+        height: 250
+      });
+    });
+
+</script>
+
+<!-- Only Valid for This Page -->
+<style type="text/css">
+    #mainNav {
+        background-color: teal;
+    }
+    .editable {
+        height: 300px;
+    }
+
+    .ql-font-roboto {
+        font-family: 'Roboto', sans-serif;
+    }
+</style>
