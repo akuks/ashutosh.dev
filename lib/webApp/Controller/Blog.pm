@@ -28,6 +28,9 @@ Catalyst Controller.
 sub index :Chained('/') PathPart('blog/new') :Args(0) GET {
     my ( $self, $c ) = @_;
 
+    unless ($c->user_exists and $c->user->email eq 'kukreti.ashutosh@gmail.com') {
+        $c->res->redirect('/');
+    }
     
     $c->stash(
         template => 'blog/create_post.tt',
@@ -46,6 +49,10 @@ sub index :Chained('/') PathPart('blog/new') :Args(0) GET {
 
 sub blog_post :Chained('/') PathPart('blog/new') :Args(0) POST {
     my ( $self, $c ) = @_;
+
+    unless ($c->user_exists and $c->user->email eq 'kukreti.ashutosh@gmail.com') {
+        $c->res->redirect('/');
+    }
 
     my $params = $c->req->params;
     

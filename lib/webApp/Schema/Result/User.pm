@@ -126,6 +126,40 @@ __PACKAGE__->has_many(
 # Created by DBIx::Class::Schema::Loader v0.07049 @ 2019-11-01 14:45:57
 # DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:t4bjP7eYAvnPcsgYTWKdwQ
 
+=head3 __PACKAGE__->add_columns
+
+DESCRIPTION:
+        EncodedColumn:
+            - password
+                data_type: 'text'
+                encoded_column: 1 (true)
+                encoded_class: 'Crypt::PBKDF2' (Choose Any Encoded Algorithm)
+                encoded_args:
+                    hash_class: HMACSHA2
+                    hash_args:
+                        sha_size: 512
+                    iterations: 10000
+                    salt_len: 10
+            - encode_check_method: 'check_password'
+
+=cut
+
+__PACKAGE__->add_columns(
+    'password' => {
+        data_type           => 'text',
+        encode_column       => 1,
+        encode_class        => 'Crypt::PBKDF2',
+        encode_args         => {
+            hash_class => 'HMACSHA2',
+            hash_args => {
+                    sha_size => 512,
+                },
+            iterations => 10000,
+            salt_len   => 10,
+        },
+        encode_check_method => 'check_password',
+    }
+);
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration
 __PACKAGE__->meta->make_immutable;

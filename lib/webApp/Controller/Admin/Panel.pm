@@ -2,6 +2,7 @@ package webApp::Controller::Admin::Panel;
 use Moose;
 use Crypt::PBKDF2;
 use Digest::SHA1 'sha1_base64';
+use Data::Dumper;
 use Safe::Isa;
 use namespace::autoclean;
 
@@ -43,10 +44,12 @@ sub login_form_POST :Chained('/') PathPart('admin/panel/login') Args(0) POST {
     my $username = $params->{username};
     my $password = $params->{password};
 
+    #$c->res->body(Dumper($params)); $c->detach();
+
     if ($username and $password) {
         if ( $c->authenticate( { email => $username, password => $password } ) ) {
-
-           $c->res->redirect('/admin/panel/dashboard');
+            
+            $c->res->redirect('/admin/panel/dashboard');
             
         }
         else {
@@ -60,6 +63,10 @@ sub login_form_POST :Chained('/') PathPart('admin/panel/login') Args(0) POST {
 
 sub dashboard :Chained('/') PathPart('admin/panel/dashboard') GET {
     my ($self, $c) = @_;
+
+    unless ($c->user_exists and $c->user->email eq 'kukreti.ashutosh@gmail.com') {
+        $c->res->redirect('/');
+    }
 
     my @blog = $c->model('DB::Blog')->search({});
     my $i = 0;
@@ -93,6 +100,14 @@ sub dashboard :Chained('/') PathPart('admin/panel/dashboard') GET {
             } } @blog
         ],
     );
+}
+
+sub logout :Chained('/') PathPart('admin/panel/logout') GET {
+    my ($self, $c) = @_;
+
+    $c->logout;
+
+    $c->res->redirect('/');
 }
 
 =encoding utf8
