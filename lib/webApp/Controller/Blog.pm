@@ -80,6 +80,8 @@ sub blog_post :Chained('/') PathPart('blog/new') :Args(0) POST {
 }
 
 =head1 METHOD
+
+=head1 METHOD
     NAME: _is_title_unique
     DESC: Check if the title is unique
 
@@ -150,10 +152,12 @@ sub _get_slug_if_not_defined  :Private {
 sub _update_or_create_blog_body :Private {
     my ($self, $c, $body, $res) = @_;
 
+    my $mod_body = $body =~ s/'/\'/r;
+
     eval {
         $c->model('DB::BlogDetail')->update_or_create( {
             blog_id => $res->id,
-            blog_text => $body,
+            blog_text => $mod_body,
         });
     };
     

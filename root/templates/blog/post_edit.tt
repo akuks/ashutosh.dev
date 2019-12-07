@@ -1,12 +1,18 @@
 <br> <br>
+[% USE  Dumper %]
+[% #Dumper.dump(post) %]
 
 <div class="container">
-    
-    <form class="form" method="post" action="/blog/new">
+    <a href="/" class="btn btn-primary">  <i class="fas fa-arrow-left"></i> </a>
+    <br><br>
+    <form class="form" method="post" action="">
+
+        <input type="hidden" name="blog_id" value="[% post.blog_id %]">
+        <input type="hidden" name="body_id" value="[% post.body_id %]">
         <!-- Blog Title -->
         <div class="form-group">
             <label for="adminBlog">Title of the Blog</label>
-            <input type="text" class="form-control" id="blog_title" name="title" placeholder="Blog Title" required>
+            <input type="text" class="form-control" id="blog_title" name="title" placeholder="Blog Title" value="[% post.title %]">
         </div>
 
         <!-- Blog Category -->
@@ -15,7 +21,13 @@
             <select class="custom-select" name="category" required>
                 <option selected>Select Category</option>
                 [% FOREACH cat IN category %]
-                   <option value="[% cat.id %]">[% cat.name %]</option>
+                    [% IF post.category == cat.name %]
+                        <option selected value="[% cat.id %]">[% cat.name %]</option>
+                    [% ELSE %]
+                        <option value="[% cat.id %]">[% cat.name %]</option>
+                    [% END %]
+                   
+                    
                 [% END %]
             </select>
         </div>
@@ -23,7 +35,7 @@
         <!-- Slug -->
          <div class="form-group">
             <label for="adminBlog">Slug</label>
-            <input type="text" name="slug" class="form-control" id="blog_slug" placeholder="Slug">
+            <input type="text" name="slug" class="form-control" id="blog_slug" placeholder="Slug" value="[% post.slug %]">
         </div>
         <br>
         
@@ -35,6 +47,7 @@
         <input type="submit" name="save_post" class="btn btn-primary" value="Save">
         <input type="submit" name="publish_post" class="btn btn-primary" value="Publish">
     </form>
+
 </div>
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
@@ -48,11 +61,16 @@
 <script>
     $(document).ready(function () {
         $('.editable').summernote({
-        placeholder: 'Enter Blog Text Here...',
-        name: 'body',
-        tabsize: 2,
-        height: 250
-      });
+            placeholder: 'Enter Blog Text Here...',
+            name: 'body',
+            tabsize: 2,
+            height: 250,
+            focus: true,
+        });
+
+        // Enter text back to summernote editor
+        $('.editable').summernote("code", '[% post.body %]')
+
     });
 
 </script>
@@ -61,9 +79,6 @@
 <style type="text/css">
     #mainNav {
         background-color: teal;
-    }
-    .editable {
-        height: 300px;
     }
 
     .ql-font-roboto {

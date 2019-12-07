@@ -27,7 +27,7 @@
             <td>[% blog.category.name %]</td>
             <td>[% blog.create_date %]</td>
             <td>
-                <a href="#"> <i class="fas fa-edit"></i> </a>  <a href="#"> <i class="fas fa-archive"></i> </a>
+                <a href="/blog/post/edit?id=[% blog.blog_id %]"> <i class="fas fa-edit"></i> </a>  <a href="#"> <i class="fas fa-archive"></i> </a>
             </td>
        </tr>
     [% END %]
