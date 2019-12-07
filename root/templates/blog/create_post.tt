@@ -51,7 +51,7 @@
         placeholder: 'Enter Blog Text Here...',
         name: 'body',
         tabsize: 2,
-        height: 250
+        height: 250,
       });
     });
 

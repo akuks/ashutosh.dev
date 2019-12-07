@@ -130,7 +130,7 @@ sub post_edit :Chained('/') PathPart('blog/post/edit') :Args(0) GET {
             title    => $blog->first->title,
             slug     => $blog->first->slug,
             category => $blog->first->category->name,
-            body     => $blog->first->blog_details->get_column('blog_text')->first,
+            body     => _convert_readable_format($blog->first->blog_details->get_column('blog_text')->first),
             body_id  => $blog->first->blog_details->get_column('id')->first,
         } } $blog->first,
     );
@@ -174,14 +174,12 @@ sub post_edit_post :Chained('/') PathPart('blog/post/edit') :Args(0) POST {
         $c->res->body("Error in updating database.".$@); $c->detach();
     }
 
-    my $mod_body = $params->{body} =~ s/'/\\\'/r;
-
     #$c->res->body(($mod_body)); $c->detach();
     eval {
         $c->model('DB::BlogDetail')->update_or_create({ 
             id        => $params->{body_id},
             blog_id   => $params->{id},
-            blog_text => $mod_body
+            blog_text => $params->{body}
         });
     };
 
@@ -191,32 +189,8 @@ sub post_edit_post :Chained('/') PathPart('blog/post/edit') :Args(0) POST {
     else {
         $message = "Blog updated Successfully."
     }
-
-    #$c->res->body(Dumper( $blog->first->blog_details->get_column('blog_text')->first )); $c->detach();
-
-    $c->stash(
-        template => 'blog/post_edit.tt',
-        
-        # Category
-        category => [
-            map { { 
-                id    => $_->id,
-                name  => $_->name,
-            } } @{ $c->config->{category} }
-        ],
-
-        # Post Details
-        post     => map { { 
-            blog_id  => $blog->first->id,
-            title    => $blog->first->title,
-            slug     => $blog->first->slug,
-            category => $blog->first->category->name,
-            body     => $blog->first->blog_details->get_column('blog_text')->first,
-            body_id  => $blog->first->blog_details->get_column('id')->first,
-        } } $blog->first,
-
-        message      => $message
-    );
+    
+    $c->forward('post_edit', [$message]);
 }
 
 =head2 METHOD
@@ -243,6 +217,14 @@ sub _get_slug_if_not_defined  :Private {
     my $new_slug = $slug =~ s/ +/-/r;
 
     return ( lc  $new_slug );
+}
+
+sub _convert_readable_format {
+    my $text = shift;
+
+     my $new_text = $text =~ s/'/\\\'/rg;
+
+     return $new_text;
 }
 
 =encoding utf8

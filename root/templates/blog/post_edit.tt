@@ -60,16 +60,21 @@
 
 <script>
     $(document).ready(function () {
+        let body = '[% post.body %]';
+        //let body = 'Hello world\'s';
+
         $('.editable').summernote({
             placeholder: 'Enter Blog Text Here...',
             name: 'body',
             tabsize: 2,
             height: 250,
             focus: true,
+            code: 'Hello World'
         });
 
         // Enter text back to summernote editor
-        $('.editable').summernote("code", '[% post.body %]')
+        //$('.editable').summernote("code", '[% post.body %]')
+        $('.editable').summernote("code", body );
 
     });
 
