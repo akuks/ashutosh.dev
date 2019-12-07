@@ -72,7 +72,6 @@
         });
 
         // Enter text back to summernote editor
-        //$('.editable').summernote("code", '[% post.body %]')
         $('.editable').summernote("code", '[% post.body %]' )
 
     });
