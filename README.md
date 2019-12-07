@@ -1,6 +1,7 @@
 ## Ashutosh.dev
 
-    ashutosh.dev is a blog written in Perl catalyst. It is in very early stages of development. I am still developing feature for this blog just for fun. Stay tuned for more updates.
+    ashutosh.dev is a blog written in Perl catalyst. It is in very early stages of development. 
+    I am still developing feature for this blog just for fun. Stay tuned for more updates.
 
 **Prerequisites to install this Project**
 
