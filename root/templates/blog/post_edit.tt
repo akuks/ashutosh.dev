@@ -60,7 +60,7 @@
 
 <script>
     $(document).ready(function () {
-        let body = '[% post.body %]';
+        
         //let body = 'Hello world\'s';
 
         $('.editable').summernote({
@@ -69,12 +69,11 @@
             tabsize: 2,
             height: 250,
             focus: true,
-            code: 'Hello World'
         });
 
         // Enter text back to summernote editor
         //$('.editable').summernote("code", '[% post.body %]')
-        $('.editable').summernote("code", body );
+        $('.editable').summernote("code", '[% post.body %]' )
 
     });
 
