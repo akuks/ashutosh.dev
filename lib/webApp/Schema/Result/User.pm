@@ -73,6 +73,18 @@ __PACKAGE__->table("user");
   is_nullable: 1
   size: 80
 
+=head2 role
+
+  data_type: 'integer'
+  is_foreign_key: 1
+  is_nullable: 1
+
+=head2 status
+
+  data_type: 'tinyint'
+  default_value: 1
+  is_nullable: 1
+
 =cut
 
 __PACKAGE__->add_columns(
@@ -91,6 +103,10 @@ __PACKAGE__->add_columns(
   { data_type => "varchar", is_nullable => 1, size => 80 },
   "last_name",
   { data_type => "varchar", is_nullable => 1, size => 80 },
+  "role",
+  { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
+  "status",
+  { data_type => "tinyint", default_value => 1, is_nullable => 1 },
 );
 
 =head1 PRIMARY KEY
@@ -122,9 +138,29 @@ __PACKAGE__->has_many(
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
+=head2 role
 
-# Created by DBIx::Class::Schema::Loader v0.07049 @ 2019-11-01 14:45:57
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:t4bjP7eYAvnPcsgYTWKdwQ
+Type: belongs_to
+
+Related object: L<webApp::Schema::Result::Role>
+
+=cut
+
+__PACKAGE__->belongs_to(
+  "role",
+  "webApp::Schema::Result::Role",
+  { id => "role" },
+  {
+    is_deferrable => 1,
+    join_type     => "LEFT",
+    on_delete     => "CASCADE",
+    on_update     => "CASCADE",
+  },
+);
+
+
+# Created by DBIx::Class::Schema::Loader v0.07049 @ 2019-12-07 22:45:17
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:s1B6jRZfjRpCStqp5w1axw
 
 =head3 __PACKAGE__->add_columns
 

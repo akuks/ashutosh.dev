@@ -6,6 +6,7 @@ class Footer extends React.Component {
     render () {
         return (
   <footer>
+    <hr/>
     <div className="container">
       <div className="row">
         <div className="col-lg-8 col-md-10 mx-auto">
@@ -39,6 +40,7 @@ class Footer extends React.Component {
         </div>
       </div>
     </div>
+    <hr/>
   </footer>
         )
     }

@@ -1,0 +1,14 @@
+<br><br>
+<div class="container">
+    <div id="category_div"></div>
+</div>
+
+<!-- Import React component scripts -->
+<script type="text/jsx" src="/static/js/categoryComponent.js"></script>
+
+<!-- Only Valid for This Page -->
+<style type="text/css">
+    #mainNav {
+        background-color: teal;
+    }
+</style>
