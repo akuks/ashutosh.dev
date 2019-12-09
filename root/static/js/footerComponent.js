@@ -36,7 +36,7 @@ class Footer extends React.Component {
               </a>
             </li>
           </ul>
-          <p className="copyright text-muted">Powered by Catalyst and StartBootstrap &copy; </p>
+          <p className="copyright text-muted">Powered by Perl Catalyst and StartBootstrap &copy; </p>
         </div>
       </div>
     </div>

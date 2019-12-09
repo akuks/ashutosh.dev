@@ -9,7 +9,7 @@ Programming Language:
 - Perl 5.26 (Works well for 5.20 +)
 
 
-##Required Perl Modules:
+**Required Perl Modules:**
 
 - Catalyst ('5.90118')
 - Catalyst::Plugin::ConfigLoader
