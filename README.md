@@ -19,6 +19,9 @@ Programming Language:
 - Catalyst::Plugin::Session::Store::File
 - Catalyst::Plugin::Static::Simple
 - Catalyst::Plugin::Session::State::Cookie
+- requires 'Catalyst::Plugin::Captcha';
+- requires 'GD';
+- requires 'GD::SecurityImage';
 - Moose
 - Crypt::PBKDF2
 - MooseX::NonMoose
