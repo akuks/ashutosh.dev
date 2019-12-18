@@ -1,6 +1,0 @@
-# Prerequisites to install this Project
-
-- Perl 5.26 (Works well for 5.20 +)
-- Catalyst 5.90118
-
-Run script/webapp_server.pl to test the application.

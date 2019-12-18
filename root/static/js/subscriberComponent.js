@@ -9,8 +9,10 @@ class SubscriberForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = {value: ''};
+        this.state = {value2: ''};
 
         this.handleChange = this.handleChange.bind(this);
+        this.handleChange1 = this.handleChange1.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
@@ -18,7 +20,7 @@ class SubscriberForm extends React.Component {
 
         event.preventDefault();
         
-        fetch("/subscriber?email=" + this.state.value)
+        fetch("/subscriber?email=" + this.state.value + '&captcha=' + this.state.value2)
             .then( res => res.json() )
             .then(
                 (result) => {
@@ -39,6 +41,9 @@ class SubscriberForm extends React.Component {
     handleChange (event) {
         this.setState({value: event.target.value});
     }
+    handleChange1 (event) {
+        this.setState({value2: event.target.value});
+    }
 
     render() {
         const { error, isLoaded, message} = this.state;
@@ -51,13 +56,15 @@ class SubscriberForm extends React.Component {
                 <div> 
                    <form id="subscriber_form" className="form" onSubmit={this.handleSubmit}> 
                         <label htmlFor=""> Subscribe Here</label>
-                        <input className="form-group form-control" type="email" value={this.state.value} onChange={this.handleChange} placeholder="Your Email" name="search" aria-label="Search" required />
+                        <input className="form-group form-control" type="email" value={this.state.value} onChange={this.handleChange} placeholder="Your Email" name="email" aria-label="Search" required />
+                        <input className="form-group form-control" type="text" value={this.state.value2} onChange={this.handleChange1} placeholder="Enter the Image text" name="captcha" aria-label="Search" required />
+                        <img src="/captcha"/><br/><br/>
                         <input className="btn btn-primary" type="submit" value="Subscribe" name="submit" />  
                     </form>  
                     
-                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <div className="alert alert-success alert-dismissible fade show" role="alert">
                         { message }
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <button type="button" className="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
@@ -68,7 +75,9 @@ class SubscriberForm extends React.Component {
             return (
                 <form id="subscriber_form" className="form" onSubmit={this.handleSubmit}> 
                     <label htmlFor=""> Subscribe Here</label>
-                    <input className="form-group form-control" type="email" value={this.state.value} onChange={this.handleChange} placeholder="Your Email" name="search" aria-label="Search" required />
+                    <input className="form-group form-control" type="email" value={this.state.value} onChange={this.handleChange} placeholder="Your Email" name="email" aria-label="Search" required />
+                    <input className="form-group form-control" type="text" value={this.state.value2} onChange={this.handleChange1} placeholder="Enter the Image text" name="captcha" aria-label="Search" required />
+                    <img src="/captcha"/><br/><br/>
                     <input className="btn btn-primary" type="submit" value="Subscribe" name="submit" />
                 </form>             
             );

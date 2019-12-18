@@ -26,6 +26,7 @@ use Catalyst qw/
     Session
     Session::Store::File
     Session::State::Cookie
+    Captcha
 /;
 
 extends 'Catalyst';
@@ -76,6 +77,20 @@ __PACKAGE__->config(
                     user_model => 'DB::User',
                 }
             }
+    },
+
+    # Captcha
+    captcha => {
+        session_name => 'captcha_string',
+        new => { 
+            width  => 250,
+            height => 30,
+            line   => 7,
+            gd_font => 'giant',
+        },
+        create => [qw/normal rect/],
+        particle => [100],
+        out => {force => 'jpeg'}
     },
 
     # Sessions will last an hour
