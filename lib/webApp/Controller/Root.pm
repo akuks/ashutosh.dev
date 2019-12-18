@@ -51,7 +51,11 @@ sub index :Path :Args(0) {
 
     # If category or search topic is passed in parameters
     my @blog = ( $params->{category} || $params->{search} ) ? 
-        _get_blog_list($c, $params) : $c->model('DB::Blog')->search({ status => 1 }) ;
+        _get_blog_list($c, $params) : 
+        $c->model('DB::Blog')->search(
+            { status => 1 }, 
+            { 'order_by' => {'-desc' => 'update_date'},
+        }) ;
 
     @blog = map { { 
         # User details
@@ -73,7 +77,7 @@ sub index :Path :Args(0) {
         # Dates
         year        => $_->creation_date->strftime('%Y'),
         month       => $_->creation_date->strftime('%m'),
-        create_date => $_->creation_date->strftime('%B %d, %Y'),
+        create_date => $_->update_date->strftime('%B %d, %Y'),
         update_date => $_->update_date->date,
     } } @blog;
 
@@ -82,7 +86,7 @@ sub index :Path :Args(0) {
     # Hello World
     $c->stash(
         template => 'home.tt',
-        title    => 'Ashutosh Personal Web Blog',
+        title    => 'Ashutosh Personal Blog',
         blogs    => \@blog,
         category => [
             map { { 
@@ -103,11 +107,21 @@ sub _get_blog_list {
     my ($c, $params) = @_;
 
     if ( $params->{category} ) {
-        return $c->model('DB::Blog')->search({ category_id => $params->{category} });
+        return $c->model('DB::Blog')->search(
+            { 
+                category_id => $params->{category} 
+            },
+            { 'order_by' => {'-desc' => 'update_date'},}
+        );
     }
     elsif ( $params->{search}) {
         return (
-            $c->model('DB::Blog')->search({ title => { -like => '%'.$params->{search}.'%' } })
+            $c->model('DB::Blog')->search(
+                { 
+                    title => { -like => '%'.$params->{search}.'%' } 
+                },
+                { 'order_by' => {'-desc' => 'update_date'},}
+            )
         );
     }
 }
@@ -135,6 +149,17 @@ sub default :Path {
     my ( $self, $c ) = @_;
     $c->response->body( 'Page not found' );
     $c->response->status(404);
+}
+
+=head2 default
+
+Standard 404 error page
+
+=cut
+
+sub captcha :Local {
+    my ( $self, $c ) = @_;
+    $c->create_captcha();
 }
 
 =head2 end

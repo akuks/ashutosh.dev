@@ -2,6 +2,7 @@ package webApp::Controller::Subscriber;
 use Moose;
 use JSON;
 use namespace::autoclean;
+use Data::Dumper;
 
 BEGIN { extends 'Catalyst::Controller'; }
 
@@ -28,6 +29,12 @@ sub index :Path :Args(0) GET {
     my $params = $c->req->params;
 
     my $subs = $c->model('DB::Subscriber')->search({ user_email => $params->{email} });
+   
+   # Validate Captcha
+   if ( ! $c->validate_captcha ($params->{captcha}) ) {
+       $c->res->body(encode_json({message => 'Invalid Captcha.' }));
+       $c->detach();
+   }
 
     if ($subs->count > 0) {
         $c->res->body(encode_json({message => 'User already subscribed.' }));
@@ -45,7 +52,6 @@ sub index :Path :Args(0) GET {
             $c->res->body(encode_json({message => 'User subscribed successfully.' }));
         }
     }
-    
 }
 
 =encoding utf8

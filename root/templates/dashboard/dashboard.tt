@@ -1,7 +1,26 @@
+<link rel="stylesheet" href="/static/css/admin.css">
 <br><br>
+
+<div class="wrapper">
+    <div id="admin_sidebar_nav"></div>
+
+  <!-- Page Content -->
+      <div id="content">
+          
+          <div id="toggle_sidebar"></div>
+
+          <div class="container"> 
+              <a href="/blog/new" class="btn btn-primary"> Add New Blog </a> 
+          </div>
+      
+      </div>
+
+</div>
+
 
 <div class="container"> 
     <a href="/blog/new" class="btn btn-primary"> Add New Blog </a> 
+    <a href="/category/category" class="btn btn-primary"> Add New Category </a> 
 </div>
 
 <br>
@@ -34,9 +53,22 @@
   </tbody>
 </table>
 
+<script type="text/jsx" src="/static/js/admin/adminSidebarNavComponent.js"></script>
+<script type="text/jsx" src="/static/js/admin/adminSidebarToggleComponent.js"></script>
+
 <!-- Only Valid for This Page -->
 <style type="text/css">
     #mainNav {
         background-color: teal;
     }
 </style>
+
+<script>
+  $(document).ready(function () {
+
+    $('#sidebarCollapse').on('click', function () {
+        $('#sidebar').toggleClass('active');
+    });
+
+});
+</script>
