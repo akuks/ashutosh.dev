@@ -9,59 +9,46 @@
           
           <div id="toggle_sidebar"></div>
 
-          <div class="container"> 
-              <a href="/blog/new" class="btn btn-primary"> Add New Blog </a> 
-          </div>
-      
+            <div class="container"> 
+                <a href="/blog/new" class="btn btn-primary"> Add New Blog </a>
+            </div>
+
+            <br>
+
+            <table id="blog_table_list" class="table" style="margin-left: 10px;">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Title</th>
+                  <th scope="col">Author</th>
+                  <th scope="col">Category</th>
+                  <th scope="col">Date (Created)</th>
+                  <th scope="col">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+
+                [% FOREACH blog IN blogs %]
+                  <tr>
+                        <th scope="row">[% blog.count %]</th>
+                        <td> <a href="/blog/post/[% blog.year %]/[% blog.month %]/[% blog.slug %]"> [% blog.title %] </a> </td>
+                        <td>[% blog.user.username %]</td>
+                        <td>[% blog.category.name %]</td>
+                        <td>[% blog.create_date %]</td>
+                        <td>
+                            <a href="/blog/post/edit?id=[% blog.blog_id %]"> <i class="fas fa-edit"></i> </a>  <a href="#"> <i class="fas fa-archive"></i> </a>
+                        </td>
+                  </tr>
+                [% END %]
+              </tbody>
+            </table>
       </div>
 
 </div>
 
-
-<div class="container"> 
-    <a href="/blog/new" class="btn btn-primary"> Add New Blog </a> 
-    <a href="/category/category" class="btn btn-primary"> Add New Category </a> 
-</div>
-
-<br>
-
-<table id="blog_table_list" class="table">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Title</th>
-      <th scope="col">Author</th>
-      <th scope="col">Category</th>
-      <th scope="col">Date (Created)</th>
-      <th scope="col">Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-
-    [% FOREACH blog IN blogs %]
-       <tr>
-            <th scope="row">[% blog.count %]</th>
-            <td> <a href="/blog/post/[% blog.year %]/[% blog.month %]/[% blog.slug %]"> [% blog.title %] </a> </td>
-            <td>[% blog.user.username %]</td>
-            <td>[% blog.category.name %]</td>
-            <td>[% blog.create_date %]</td>
-            <td>
-                <a href="/blog/post/edit?id=[% blog.blog_id %]"> <i class="fas fa-edit"></i> </a>  <a href="#"> <i class="fas fa-archive"></i> </a>
-            </td>
-       </tr>
-    [% END %]
-  </tbody>
-</table>
-
+<script type="text/jsx" src="/static/js/admin/adminApiCallComponent.js"></script>
 <script type="text/jsx" src="/static/js/admin/adminSidebarNavComponent.js"></script>
 <script type="text/jsx" src="/static/js/admin/adminSidebarToggleComponent.js"></script>
-
-<!-- Only Valid for This Page -->
-<style type="text/css">
-    #mainNav {
-        background-color: teal;
-    }
-</style>
 
 <script>
   $(document).ready(function () {
@@ -70,5 +57,13 @@
         $('#sidebar').toggleClass('active');
     });
 
-});
+  }); 
+
 </script>
+
+<!-- Only Valid for This Page -->
+<style type="text/css">
+    #mainNav {
+        background-color: teal;
+    }
+</style>

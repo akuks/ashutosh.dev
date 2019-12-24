@@ -1,9 +1,16 @@
+<link rel="stylesheet" href="/static/css/admin.css">
+
 <br><br>
-<div class="container">
-    <div id="category_div"></div>
+<div class="wrapper">
+    <div id="admin_sidebar_nav"></div>
+
+    <div class="container">
+        <div id="category_div"></div>
+    </div>
 </div>
 
 <!-- Import React component scripts -->
+<script type="text/jsx" src="/static/js/admin/adminSidebarNavComponent.js"></script>
 <script type="text/jsx" src="/static/js/categoryComponent.js"></script>
 
 <!-- Only Valid for This Page -->

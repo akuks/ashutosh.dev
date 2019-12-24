@@ -8,6 +8,16 @@
 Programming Language:
 - Perl 5.26 (Works well for 5.20 +)
 
+If you are using Ubuntu or any other Unix based Utility, please install the 'pkg-config' if not installed already.
+
+* Ubuntu 18.0.4 +
+ - sudo apt install pkg-config 
+
+ Once the pkg-config installed, install the ExtUtils::PkgConfig using:
+- cpanm ExtUtils::PkgConfig
+
+* Next is to install the 'gdlib', if not installed already
+- sudo apt install libgd-dev
 
 **Required Perl Modules:**
 
@@ -19,6 +29,9 @@ Programming Language:
 - Catalyst::Plugin::Session::Store::File
 - Catalyst::Plugin::Static::Simple
 - Catalyst::Plugin::Session::State::Cookie
+- requires 'Catalyst::Plugin::Captcha';
+- requires 'GD';
+- requires 'GD::SecurityImage';
 - Moose
 - Crypt::PBKDF2
 - MooseX::NonMoose
