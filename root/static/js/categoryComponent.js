@@ -45,9 +45,9 @@ class Category extends React.Component {
                     </div>
                     
                     {/* Category Name Input Field */}
-                    <div class="form-group mx-sm-3 mb-2">
-                        <label htmlFor="" class="sr-only">Category Name</label>
-                        <input className="form-group form-control" type="email" value='Hello' placeholder="Category Name" name="category" required />
+                    <div className="form-group mx-sm-3 mb-2">
+                        <label htmlFor="" className="sr-only">Category Name</label>
+                        <input className="form-group form-control" type="text" value={this.state.value} onChange={this.handleChange} placeholder="Category Name" name="category" required />
                     </div>
                     
                     <input className="btn btn-primary mb-2" type="submit" value="Create" name="submit" />
@@ -62,15 +62,17 @@ class Category extends React.Component {
                                 <th scope="col">Actions</th>
                             </tr>
                         </thead>
-                        {items.map(item => (
-                            <tr>
-                                <td> {item.count} </td>
-                                <td> {item.name} </td>
-                                <td> 
-                                    <a href=""> <i class="fas fa-check"></i> </a> &nbsp; &nbsp; <a href="#"> <i class="fas fa-archive"></i> </a>
-                                </td>
-                            </tr>
-                        ))}
+                        <tbody>
+                            {items.map(item => (
+                                <tr key={item.name}>
+                                    <td> {item.count} </td>
+                                    <td> {item.name} </td>
+                                    <td> 
+                                        <a href=""> <i className="fas fa-check"></i> </a> &nbsp; &nbsp; <a href="#"> <i className="fas fa-archive"></i> </a>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
                     </table>
                     
                 </div>

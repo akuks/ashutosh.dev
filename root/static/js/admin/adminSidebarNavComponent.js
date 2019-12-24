@@ -1,6 +1,8 @@
 'use strict';
 
-import {getCategoryAPI} from '/static/js/admin/adminApiCallComponent';
+// console.log("Current Directory: " + this.props.location.pathname);
+
+// import { getCategoryAPI } from '/static/js/admin/adminApiCallComponent.js';
 
 const adminSidebarNav = React.createElement;
 
@@ -16,7 +18,7 @@ export default class AdminSidebarNav extends React.Component {
 
             <nav id="sidebar">
                 <div className="sidebar-header sidebar-list">
-                    <h3> Admin Sidebar </h3>
+                    <h3> Admin Settings </h3>
                 </div>
 
                 <ul className="list-unstyled components sidebar-list">
@@ -25,7 +27,8 @@ export default class AdminSidebarNav extends React.Component {
                     {/* <!-- Manage Category --> */}
                     <li className="sidebar-list">
                         {/* <a href="/admin/panel/dashboard?params=category">Category</a> */}
-                        <a href="#" onClick={this.props.getCategoryAPI()}> Category </a>
+                        <a href="/category/category">Category</a>
+                        {/* <a href="#" onClick={this.props.getCategoryAPI()}> Category </a> */}
                     </li>
 
                     {/* <!-- Manage Blog Contents --> */}
