@@ -20,6 +20,7 @@ Catalyst Controller.
 
 =cut
 
+my $static_image = '/static/images/';
 
 =head2 index
 
@@ -29,6 +30,7 @@ sub index :Path :Args(3) {
     my ( $self, $c ) = @_;
 
     my $args = $c->request->arguments;
+
     my ($blog, $post);
 
     if ( ! $args->[2]) {
@@ -70,6 +72,7 @@ sub index :Path :Args(3) {
         body        => $_->blog_text,
         title       => $_->blog->title,
         author      => $_->blog->user->first_name,
+        image       => ($_->blog->image_name) ? $static_image.$_->blog->image_name : $static_image.'intro.png',
         create_date => $_->blog->creation_date->strftime('%B %d, %Y'),
     } } $post->first;
 
@@ -80,7 +83,7 @@ sub index :Path :Args(3) {
             map { { 
                 id    => $_->id,
                 name  => $_->name,
-                count => _get_topic_count_by_category($c, $_->id)
+                count => _get_topic_count_by_category($c, $_->id),
             } } @{$c->config->{category}}
         ],
     );

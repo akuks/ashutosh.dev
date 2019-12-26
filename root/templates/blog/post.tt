@@ -3,7 +3,7 @@
 [% #Dumper.dump(post) %]
 
 <!-- Page Header -->
-  <header class="masthead" style="background-image: url('/static/images/intro.png')">
+  <header class="masthead" style="background-image: url('[% post.0.image %]')">
     <div class="overlay"></div>
     <div class="container">
       <div class="row">

@@ -63,6 +63,13 @@ __PACKAGE__->table("blog");
   is_foreign_key: 1
   is_nullable: 0
 
+=head2 image_name
+
+  data_type: 'varchar'
+  default_value: 'intro.png'
+  is_nullable: 0
+  size: 60
+
 =head2 title
 
   data_type: 'varchar'
@@ -117,6 +124,13 @@ __PACKAGE__->add_columns(
     extra => { unsigned => 1 },
     is_foreign_key => 1,
     is_nullable => 0,
+  },
+  "image_name",
+  {
+    data_type => "varchar",
+    default_value => "intro.png",
+    is_nullable => 0,
+    size => 60,
   },
   "title",
   { data_type => "varchar", default_value => "", is_nullable => 0, size => 100 },
@@ -215,8 +229,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07049 @ 2019-11-26 22:12:12
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:JR7Kn5slZ1wGCTBbY3PMWA
+# Created by DBIx::Class::Schema::Loader v0.07049 @ 2019-12-26 22:35:10
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:dOmOE5EwIZpr+9F9im6gYA
 
 __PACKAGE__->belongs_to(
   "category",
