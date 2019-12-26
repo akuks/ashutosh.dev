@@ -21,8 +21,9 @@ Catalyst Controller.
 =cut
 
 
-=head2 index
-
+=head2 GET /blog/new
+    :GET /blog/new
+        summary: Create a new blog in Database
 =cut
 
 sub index :Chained('/') PathPart('blog/new') :Args(0) GET {
@@ -43,7 +44,35 @@ sub index :Chained('/') PathPart('blog/new') :Args(0) GET {
     );
 }
 
-=head2 index
+=head2 POST /blog/new
+    
+    :POST /blog/new
+        summary: Create a new blog in Database
+        parameters:
+            - in: body
+                name: title
+                type: string
+                description: Title of the blog (must be unique)
+
+            - in: body
+                name: body
+                type: string
+                description: Body of the blog
+
+            - in: body
+                name: category
+                type: integer
+                description: Category ID
+            
+            - in: body
+                name: slug
+                type: string
+                description: URL slug
+            
+            - in: body
+                name: status
+                type: integer
+                description: Status of the blog (Draft or Publish)
 
 =cut
 
@@ -80,11 +109,17 @@ sub blog_post :Chained('/') PathPart('blog/new') :Args(0) POST {
 }
 
 =head1 METHOD
-
-=head1 METHOD
     NAME: _is_title_unique
     DESC: Check if the title is unique
-
+    
+    Parameters:
+        --> name: title
+            type: string
+            description: Title of the blog
+        
+        --> name: slug
+            type: string
+            description: slug of the blog
 =cut
 
 sub _is_title_unique : Private {
@@ -111,6 +146,23 @@ sub _is_title_unique : Private {
 =head1 METHOD
     NAME: _create_blog
     DESC: Enter the blog in the database
+
+    Parameters:
+        --> name: title
+            type: string
+            description: Title of the blog
+        
+        --> name: slug
+            type: string
+            description: slug of the blog
+
+        --> name: status
+            type: integer
+            description: Status of the blog (Draft or Publish)
+        
+        --> name: category_id
+            type: integer
+            description: Category ID
 =cut
 
 sub _create_blog :Private {
