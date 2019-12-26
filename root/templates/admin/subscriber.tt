@@ -1,0 +1,40 @@
+<link rel="stylesheet" href="/static/css/admin.css">
+
+<br><br>
+
+<div class="wrapper">
+     <div id="admin_sidebar_nav"></div>
+
+     <div class="container">
+        <table class="table table-content">
+            <thead>
+                <tr>
+                    <th colspan=""> Email </th>
+                    <th colspan=""> Actions </th>
+                </tr>
+            </thead>
+            <tbody>
+                [% FOREACH list IN subscriber_list %]
+                    <tr>
+                        <td class=""> [% list.email %]
+                        <td>  </td>
+                    </tr>
+                    
+                [% END %]
+            </tbody>
+        </table>
+        
+        
+    </div>
+
+</div>
+
+<!-- Import React component scripts -->
+<script type="text/jsx" src="/static/js/admin/adminSidebarNavComponent.js"></script>
+
+<!-- Only Valid for This Page -->
+<style type="text/css">
+    #mainNav {
+        background-color: teal;
+    }
+</style>

@@ -6,6 +6,16 @@
 
 const adminSidebarNav = React.createElement;
 
+// Elements in sidebar navigation
+const sideBarElements = [
+    { name: 'Blog', url: '/admin/panel/dashboard?params=blog'},
+    { name: 'Category', url: '/category/category'},
+    { name: 'Home', url: '#'},
+    { name: 'About', url: '#'},
+    { name: 'Contact', url: '#'},
+    { name: 'Subscriber', url: '/subscriber/list'},
+];
+
 export default class AdminSidebarNav extends React.Component {
 
     constructor(props){
@@ -14,8 +24,13 @@ export default class AdminSidebarNav extends React.Component {
     }
 
     render() {
+        const listsideBarElements = sideBarElements.map((element) => 
+            <li key={element.name} className="sidebar-list">
+                <a href={ element.url }>{element.name}</a>  <hr/>       
+            </li>
+        );
+        
         return (
-
             <nav id="sidebar">
                 <div className="sidebar-header sidebar-list">
                     <h3> Admin Settings </h3>
@@ -24,32 +39,7 @@ export default class AdminSidebarNav extends React.Component {
                 <ul className="list-unstyled components sidebar-list">
                     <p>  </p>
                     
-                    {/* <!-- Manage Category --> */}
-                    <li className="sidebar-list">
-                        {/* <a href="/admin/panel/dashboard?params=category">Category</a> */}
-                        <a href="/category/category">Category</a>
-                        {/* <a href="#" onClick={this.props.getCategoryAPI()}> Category </a> */}
-                    </li>
-
-                    {/* <!-- Manage Blog Contents --> */}
-                    <li className="sidebar-list">
-                        <a href="/admin/panel/dashboard?params=blog">Blog</a>
-                    </li>
-
-                    {/* <!-- Manage Home content --> */}
-                    <li className="sidebar-list">
-                        <a href="#">Home</a>
-                    </li>
-
-                    {/* <!-- Manage About me content --> */}
-                    <li className="sidebar-list">
-                        <a href="#">About</a>
-                    </li>
-
-                    {/* <!-- Manage Contact content --> */}
-                    <li className="sidebar-list">
-                        <a href="#">Contact</a>
-                    </li>
+                    {listsideBarElements}
                 
                 </ul>
 

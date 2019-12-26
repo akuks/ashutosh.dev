@@ -54,6 +54,36 @@ sub index :Path :Args(0) GET {
     }
 }
 
+=head2 GET /subscriber/list
+    :GET /subscriber/list
+
+=cut
+
+sub subscriber_get :Chained('/') PathPart('subscriber/list') :Args(0) GET {
+    my ($self, $c) = @_;
+
+    # If user is not logged in and admin
+    unless ( $c->user_exists and $c->user->role->role_name eq 'admin' ) {
+        $c->res->redirect('/'); $c->detach();
+    }
+
+    my @list;
+
+    eval {
+        @list = $c->model('DB::Subscriber')->search({});
+    };
+    @list = map { { 
+        id    => $_->id,
+        email => $_->user_email
+    } } @list;
+    
+    
+    $c->stash(
+        template        => 'admin/subscriber.tt', 
+        subscriber_list => \@list,
+    );
+}
+
 =encoding utf8
 
 =head1 AUTHOR
