@@ -54,28 +54,12 @@
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
 
-<link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.css" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.js"></script>
-
+<link rel="stylesheet" href="https://unpkg.com/easymde/dist/easymde.min.css">
+<script src="https://unpkg.com/easymde/dist/easymde.min.js"></script>
 
 <script>
-    $(document).ready(function () {
-        
-        //let body = 'Hello world\'s';
-
-        $('.editable').summernote({
-            placeholder: 'Enter Blog Text Here...',
-            name: 'body',
-            tabsize: 2,
-            height: 250,
-            focus: true,
-        });
-
-        // Enter text back to summernote editor
-        $('.editable').summernote("code", '[% post.body %]' )
-
-    });
-
+    var easyMDE = new EasyMDE({element: document.getElementById('body')});
+    easyMDE.value('[% post.body %]');
 </script>
 
 <!-- Only Valid for This Page -->
